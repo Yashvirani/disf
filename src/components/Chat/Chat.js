@@ -5,6 +5,7 @@ import CardGiftcardRoundedIcon from '@material-ui/icons/CardGiftcardRounded';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import GifIcon from '@material-ui/icons/Gif';
 import './Chat.css';
+import Message from '../Message/Message';
 
 function Chat() {
     return (
@@ -12,7 +13,7 @@ function Chat() {
             <ChatHeader />
 
             <div className="chat__messages">
-
+                <Message />
             </div>
             <div className="chat__input">
                 <AddCircleOutlineRoundedIcon fontSize="large"/>
