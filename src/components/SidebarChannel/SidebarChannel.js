@@ -4,7 +4,7 @@ import './SidebarChannel.css';
 function SidebarChannel({id,channel}) {
     return (
         <div className="sidebarChannel">
-            <h4></h4>
+            <h4><span className="sidebarChannel__hash">#</span>Channel 1</h4>
         </div>
     )
 }
