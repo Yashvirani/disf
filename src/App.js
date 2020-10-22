@@ -1,46 +1,50 @@
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import React from 'react';
 import './App.css';
-import Chat from './components/Chat/Chat';
-import Sidebar from './components/Sidebar/Sidebar';
-import { selectUser } from "./features/userSlice";
-import { useSelector } from 'react-redux';
-import Login from './components/Login/Login';
-import { auth } from './components/firebase/firebase';
-import {login,logout} from './features/userSlice';
-
+import Sidebar from './Sidebar';
+import ExpandMore from '@material-ui/icons/ExpandMore'
+import Chat from './Chat';
+import { selectUser } from './features/userSlice';
+import { useDispatch, useSelector } from 'react-redux'
+import Login from './Login';
+import { useEffect } from 'react';
+import { auth } from './firebase';
+import { login, logout } from './features/userSlice'
 
 function App() {
-  const user = useSelector(selectUser);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const user = useSelector(selectUser)
 
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
-      console.log('User is',authUser);
+
+      console.log(authUser)
+
       if (authUser) {
         dispatch(login({
-          uid:authUser.uid,
-          photo:authUser.photoURL,
-          email:authUser.email,
-          displayName:authUser.displayName
+          uid: authUser.uid,
+          photo: authUser.photoURL,
+          email: authUser.email,
+          displayName: authUser.displayName
         }))
+      } else {
+        dispatch(logout())
       }
-      else {
-        dispatch(logout());
-      }
-    });
-  },[dispatch]);
+    })
+  }, [dispatch])
+
+  console.log(user)
+
   return (
     <div className="app">
       {user ? (
-            <>
-           <Sidebar />  
-           <Chat />
-           </>
-      ):(
-        <Login />
-      )}
-   
+        <>
+          <Sidebar />
+          <Chat />
+        </>
+
+      ) : (
+          <Login />
+        )}
     </div>
   );
 }
